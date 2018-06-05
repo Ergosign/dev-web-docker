@@ -42,4 +42,8 @@ RUN apt-get update && \
 
 ENV CHROME_BIN /usr/bin/chromium
 
+EXPOSE 4200/tcp
+EXPOSE 4201/tcp
+EXPOSE 4202/tcp
+
 CMD [ "npm", "start" ]
