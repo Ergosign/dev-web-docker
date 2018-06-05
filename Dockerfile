@@ -13,8 +13,8 @@ ENV LANG C.UTF-8
 RUN npm i -g npm@6.1.0
 
 # setup working directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /usr/dev/app
+WORKDIR /usr/dev/app
 
 # install dependencies
 RUN buildDeps='curl ca-certificates rsync openssh-client graphicsmagick git-all' \
