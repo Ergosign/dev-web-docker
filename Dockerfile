@@ -16,6 +16,7 @@ RUN apk -U --no-cache \
     dbus \
     grep \ 
     udev \
+    bash \
     && apk del --purge --force linux-headers binutils-gold gnupg zlib-dev libc-utils \
     && rm -rf /var/lib/apt/lists/* \
     /var/cache/apk/* \
