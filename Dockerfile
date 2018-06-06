@@ -11,13 +11,9 @@ RUN echo "http://dl-2.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
 RUN apk -U --no-cache \
 	--allow-untrusted add \
     zlib-dev \
+    tzdata \
     chromium \
-    xvfb \
-    wait4ports \
-    xorg-server \
     dbus \
-    ttf-freefont \
-    mesa-dri-swrast \
     grep \ 
     udev \
     && apk del --purge --force linux-headers binutils-gold gnupg zlib-dev libc-utils \
@@ -30,11 +26,6 @@ RUN apk -U --no-cache \
     /usr/lib/node_modules/npm/html \
     /usr/lib/node_modules/npm/scripts
 
-# Add Chrome as a user
-RUN adduser -D chrome \
-    && chown -R chrome:chrome /usr/src/app
-# Run Chrome non-privileged
-USER chrome
 
 ENV CHROME_BIN /usr/bin/chromium-browser
 ENV CHROME_PATH /usr/lib/chromium/
@@ -48,9 +39,14 @@ RUN npm i -g npm@6.1.0
 RUN mkdir -p /usr/dev/app
 WORKDIR /usr/dev/app
 
+# Add Chrome as a user
+RUN adduser -D chrome \
+    && chown -R chrome:chrome /usr/dev/app
+# Run Chrome non-privileged
+USER chrome
+
 # update Timezone
-RUN echo Europe/Paris | tee /etc/timezone
-RUN dpkg-reconfigure --frontend noninteractive tzdata
+ENV TZ Europe/Paris
 
 EXPOSE 4200/tcp
 EXPOSE 4201/tcp
