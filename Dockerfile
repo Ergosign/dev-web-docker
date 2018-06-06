@@ -1,4 +1,4 @@
-FROM node:10.3.0-stretch
+FROM node:10.3.0-alpine
 
 LABEL Description="This image is during development of Ergosign Web Projects, setting up the standard development environment" Vendor="Ergosign GmbH" Version="1.0.0"
 
